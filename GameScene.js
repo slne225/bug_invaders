@@ -57,8 +57,7 @@ class GameScene extends Phaser.Scene {
 			this.add.text(152, 270, 'Click to Restart', { fontSize: '15px', fill: '#000000' });
 
 			this.input.on('pointerup', () => {
-				gameState.score = 0;
-				this.scene.restart();
+				this.scene.start('StartScene');
 			});
 		});
 	}
