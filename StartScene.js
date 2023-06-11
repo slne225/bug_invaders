@@ -12,3 +12,24 @@ class StartScene extends Phaser.Scene {
         })
     } 
 }
+
+			//   if (gameState.cursors.space.justDown && isPaused === false) {
+			// 	togglePause();
+			// 	console.log(isPaused)
+				// } else if (gameState.cursors.space.isUp && isPaused === true){
+				// 	isPaused = false;
+				// 	console.log(isPaused)
+				// }
+				// console.log(isPaused)
+
+		// 	if (gameState.cursors.space.isDown) {
+		// 		 if (isPaused === false) {
+		// 			isPaused = true;
+		// 			console.log(isPaused)
+		// 			console.log('test')
+		// 			gameState.scoreText.setText(`Score: ${gameState.score += 100}`);
+					
+		// 	} 
+		// } else {
+		// 	isPaused = false
+		// 	console.log(isPaused)

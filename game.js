@@ -1,6 +1,6 @@
-const gameState = {
-      score: 0
-};
+// const gameState = {
+//       score: 0
+// }
 
 const config = {
 	type: Phaser.AUTO,
