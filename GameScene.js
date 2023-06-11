@@ -45,11 +45,15 @@ class GameScene extends Phaser.Scene {
 		//randomly generates a bug at the top of the game display
 		const bugGen = () => {
 			if (isPaused === false) {
-				const xCoord = Math.random() * 500
-				let randomBug = bugList[Math.floor(Math.random() * 3)]
-				gameState.bugs.create(xCoord, 10, randomBug)
+				if (gameOver === false){
+					const xCoord = Math.random() * 500
+					let randomBug = bugList[Math.floor(Math.random() * 3)]
+					gameState.bugs.create(xCoord, 10, randomBug)
+				}
 			}
 		}
+		
+		let gameOver = false;
 
 		this.initializeBugGenLoop(bugGen);
 
@@ -62,7 +66,7 @@ class GameScene extends Phaser.Scene {
 		
 		//if the player and bug collide it ends the game
 		this.physics.add.collider(gameState.player, gameState.bugs, () => {
-			this.initializeBugGenLoop.bugGenLoop.destroy();
+			gameOver = true;
 			this.physics.pause();
 			gameState.score = 0;
 			this.add.text(180, 250, 'Game Over', { fontSize: '15px', fill: '#000000' });
@@ -108,6 +112,7 @@ class GameScene extends Phaser.Scene {
 				}
 			  }
 			
+			//push the space bar to pause and unpause the game
 			if (Phaser.Input.Keyboard.JustDown(gameState.spaceKey)) {
 				togglePause()
 			}
@@ -142,7 +147,7 @@ class GameScene extends Phaser.Scene {
 	initializeBugGenLoop(loopCallback) {
 
 		this.time.addEvent({
-				delay: 1000, //one second
+				delay: 100, //one second
 				callback: loopCallback, //bugGen
 				callbackScope: this,
 				loop: true, 
