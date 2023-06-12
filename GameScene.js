@@ -98,7 +98,7 @@ class GameScene extends Phaser.Scene {
 			
 			//if you pause it will suspend the falling bugs
 			if (isPaused === true) {
-				gameState.bugs.setVelocity(0, -3.4);
+				gameState.bugs.setVelocity(0, -3.3);
 			}
 			
 			//toggles the isPaused global variable to true (pause) or false (unpause)
