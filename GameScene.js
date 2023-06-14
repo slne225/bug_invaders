@@ -3,10 +3,12 @@ const gameState = {
 };
  
 let isPaused = false;
-console.log
+
+let gameOver = false;
+
 class GameScene extends Phaser.Scene {
 	constructor(){
-		super({ key: 'GameScene' })
+		super({ key: 'GameScene' });
 	}
 
 	preload() {
@@ -53,9 +55,10 @@ class GameScene extends Phaser.Scene {
 			}
 		}
 		
-		let gameOver = false;
+		
 
 		this.initializeBugGenLoop(bugGen);
+		
 
 		//if the bug hits the platform the score increases
 		this.physics.add.collider(gameState.bugs, platforms, function (bug) {
@@ -77,6 +80,8 @@ class GameScene extends Phaser.Scene {
 			this.input.on('pointerup', () => {
 				this.scene.stop('GameScene')
 				this.scene.start('StartScene')
+				gameOver = false;
+				isPaused = false;
 			});
 		});
 
@@ -103,7 +108,7 @@ class GameScene extends Phaser.Scene {
 			
 			//toggles the isPaused global variable to true (pause) or false (unpause)
 			const togglePause = () => {
-				if (isPaused === false) {
+				if (isPaused === false && gameOver != true) {
 				  isPaused = true;
 				  this.displayPauseScreen();
 				} else {
@@ -138,9 +143,10 @@ class GameScene extends Phaser.Scene {
 
 	// remove overlay and pause messages when game is unpaused
 	removePauseScreen() {
-		gameState.pauseOverlay.destroy();
-		gameState.pauseText.destroy();
-		gameState.resumeText.destroy();
+		if (gameOver != true) {			gameState.pauseOverlay.destroy();
+			gameState.pauseText.destroy();
+			gameState.resumeText.destroy();
+		}
 	}
 
 	//loop bugGen to drop bugs from the sky at random 
@@ -155,6 +161,8 @@ class GameScene extends Phaser.Scene {
 	}
 
 }
+
+
 
 
 
